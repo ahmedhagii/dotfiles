@@ -1,0 +1,24 @@
+#!/bin/zsh
+
+alias gs="git status"
+alias gc="git commit -m"
+alias ga="git add"
+alias vim='nvim'
+
+case `uname` in
+  Darwin)
+    alias flushdns='sudo dscacheutil -flushcache;sudo killall -HUP mDNSResponder;say cache flushed'
+    alias ls='ls -GpF' # Mac OSX specific
+    alias ll='ls -alGpF' # Mac OSX specific
+  ;;
+  Linux)
+    alias ll='ls -al'
+    alias ls='ls --color=auto' 
+  ;;
+esac
+
+alias reload='source ~/.aliases source ~/.zshrc'
+alias g++='g++ -std=c++11'
+alias tree="find . -print | sed -e 's;[^/]*/;|____;g;s;____|; |;g'"
+alias kg="kubectl get"
+
