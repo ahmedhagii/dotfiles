@@ -1,0 +1,5 @@
+#!//bin/bash
+
+# Usage: note <importnat-note-to-save>
+set -e
+echo "$1"'\n' >> ~/notes

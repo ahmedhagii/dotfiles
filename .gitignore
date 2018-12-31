@@ -1,0 +1,20 @@
+# place this in root directory to allow filesystem search tools to ignore some unimportant paths
+
+/Library/
+/Music/
+/Movies/
+
+# Compiled Python files
+*.pyc
+
+# Folder view configuration files
+.DS_Store
+Desktop.ini
+
+# Thumbnail cache files
+._*
+Thumbs.db
+
+# Files that might appear on external disks
+.Spotlight-V100
+.Trashes
