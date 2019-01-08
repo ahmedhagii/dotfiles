@@ -10,6 +10,8 @@ call vundle#begin()
 " let Vundle manage Vundle, required
 Plugin 'gmarik/Vundle.vim'
 
+let g:python3_host_prog='/usr/local/bin/python3'
+
 if has('nvim')
 	Plugin 'Shougo/deoplete.nvim', { 'do': ':UpdateRemotePlugins' }
 else
@@ -75,14 +77,14 @@ Plugin 'ryanoasis/vim-devicons'
 " }}
 Plugin 'scrooloose/nerdcommenter'
 " {{{
-    " Add spaces after comment delimiters by default
-    let g:NERDSpaceDelims = 1
-    " Use compact syntax for prettified multi-line comments
-    let g:NERDCompactSexyComs = 1
-    " Allow commenting and inverting empty lines (useful when commenting a region)
-    let g:NERDCommentEmptyLines = 1
-    " Enable trimming of trailing whitespace when uncommenting
-    let g:NERDTrimTrailingWhitespace = 1
+	" Add spaces after comment delimiters by default
+	let g:NERDSpaceDelims = 1
+	" Use compact syntax for prettified multi-line comments
+	let g:NERDCompactSexyComs = 1
+	" Allow commenting and inverting empty lines (useful when commenting a region)
+	let g:NERDCommentEmptyLines = 1
+	" Enable trimming of trailing whitespace when uncommenting
+	let g:NERDTrimTrailingWhitespace = 1
 " }}}
 Plugin 'godlygeek/tabular'
 Plugin 'majutsushi/tagbar'
@@ -92,9 +94,9 @@ Plugin 'alvan/vim-closetag'
 Plugin 'romainl/vim-cool'
 Plugin 'JamshedVesuna/vim-markdown-preview'
 " {{
-    let vim_markdown_preview_github=1
-    let vim_markdown_preview_browser='Google Chrome'
-    let vim_markdown_preview_toggle=0
+	let vim_markdown_preview_github=1
+	let vim_markdown_preview_browser='Google Chrome'
+	let vim_markdown_preview_toggle=0
 " }}
 Plugin 'plasticboy/vim-markdown'
 Plugin 'pangloss/vim-javascript'
@@ -103,16 +105,16 @@ Plugin 'mxw/vim-jsx'
 Plugin 'leafgarland/typescript-vim'
 Plugin 'fatih/vim-go'
 " {{
-    let g:go_fmt_command = "goimports"
-    let g:go_fmt_fail_silently = 1
-    let g:go_highlight_functions = 1
+	let g:go_fmt_command = "goimports"
+	let g:go_fmt_fail_silently = 1
+	let g:go_highlight_functions = 1
 " }}
 Plugin 'w0rp/ale'
 " {{
-    let g:ale_sign_error = '●' " Less aggressive than the default '>>'
-    let g:ale_sign_warning = '.'
-    let g:ale_lint_on_enter = 0 " Less distracting when opening a new file
-    let g:ale_lint_on_save = 1
+	let g:ale_sign_error = '●' " Less aggressive than the default '>>'
+	let g:ale_sign_warning = '.'
+	let g:ale_lint_on_enter = 0 " Less distracting when opening a new file
+	let g:ale_lint_on_save = 1
 " }
 Plugin 'skywind3000/asyncrun.vim'
 " All of your Plugins must be added before the following line
@@ -170,22 +172,22 @@ colorscheme nord
 
 " Set extra options when running in GUI mode
 if has("gui_running")
-    set guioptions-=T
-    set guioptions-=e
-    set guioptions-=L
-    set guioptions-=r
-    set guioptions-=R
-    colorscheme stellarized_dark
-    " colorscheme Tomorrow-Night
+	set guioptions-=T
+	set guioptions-=e
+	set guioptions-=L
+	set guioptions-=r
+	set guioptions-=R
+	colorscheme stellarized_dark
+	" colorscheme Tomorrow-Night
 endif
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 
 
 " Return to last edit position when opening files (You want this!)
 autocmd BufReadPost *
-            \ if line("'\"") > 0 && line("'\"") <= line("$") |
-            \   exe "normal! g`\"" |
-            \ endif
+			\ if line("'\"") > 0 && line("'\"") <= line("$") |
+			\   exe "normal! g`\"" |
+			\ endif
 " Remember info about open buffers on close
 set viminfo^=%
 
@@ -235,14 +237,19 @@ nmap <Down> 10j
 " change directory to current file
 nnoremap ,cd :cd %:p:h<CR>:pwd<CR>
 
+" Folding
+set foldmethod=indent   "fold based on indent
+set foldnestmax=3       "deepest fold is 3 levels
+set nofoldenable        "dont fold by default
+
 
 "if exists(":Tabularize")
-    nmap <leader>a= :Tab/=<CR>
-    vmap <leader>a= :Tab/=<CR>
-    nmap <leader>a: :Tab/:\zs<CR>
-    vmap <leader>a: :Tab/:\zs<CR>
-    nmap <leader>a" :Tab/"<CR>
-    vmap <leader>a" :Tab/"<CR>
+	nmap <leader>a= :Tab/=<CR>
+	vmap <leader>a= :Tab/=<CR>
+	nmap <leader>a: :Tab/:\zs<CR>
+	vmap <leader>a: :Tab/:\zs<CR>
+	nmap <leader>a" :Tab/"<CR>
+	vmap <leader>a" :Tab/"<CR>
 "endif
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 
@@ -280,8 +287,8 @@ autocmd FileType go      call GOSET()
 " }}
 "" GO
 function! GOSET()
-    noremap ,gob :GoBuild<CR>
-    noremap ,go :GoRun<CR>
+	noremap ,gob :GoBuild<CR>
+	noremap ,go :GoRun<CR>
 endfunction
 
 command! -bang -nargs=* Ag call fzf#vim#ag(<q-args>, '--color-path="0;33"', <bang>0)

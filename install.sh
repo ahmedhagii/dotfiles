@@ -1,36 +1,51 @@
 #!/bin/zsh
 
-if [[ "$OSTYPE" == "linux-gnu" ]]; then
-    # install neovim
-    sudo add-apt-repository ppa:neovim-ppa/unstable
-    sudo apt-get update
-    sudo apt-get install -y neovim
-    sudo apt-get install -y python-dev python-pip python3-dev python3-pip
-    # install zsh
-    sudo apt-get install -y zsh
-    sudo chsh -s $(which zsh) $(whoami)
-
+if [ -f /etc/redhat-release ]; then
+	# CentOS
+	sudo yum install -y the_silver_searcher zsh neovim fd tmux
+	git clone --depth 1 https://github.com/junegunn/fzf.git ~/.fzf
+	~/.fzf/install --completion --update-rc --no-key-bindings
+elif [ -f /etc/lsb-release ]; then
+	# Ubuntu
+	# install neovim
+	sudo add-apt-repository ppa:neovim-ppa/unstable
+	sudo apt-get update
+	sudo apt-get install -y neovim
+	sudo apt-get install -y python-dev python-pip python3-dev python3-pip
+	# install zsh
+	sudo apt-get install -y zsh
+	sudo chsh -s $(which zsh) $(whoami)
 elif [[ "$OSTYPE" == "darwin"* ]]; then
-    # install neovim
-    brew install neovim
+	# install neovim
+	brew install neovim
 	# install vundle vim plugin manager
-	git clone https://github.com/VundleVim/Vundle.vim.git ~/.vim/bundle/Vundle.vim
-    # install tmux
-    brew install tmux
-    # install zsh
-    brew install zsh
-    chsh -s $(which zsh)
-    # install prezto
-    git clone --recursive https://github.com/sorin-ionescu/prezto.git "${ZDOTDIR:-$HOME}/.zprezto"
-    setopt EXTENDED_GLOB
-    for rcfile in "${ZDOTDIR:-$HOME}"/.zprezto/runcoms/^README.md(.N); do
-      ln -s "$rcfile" "${ZDOTDIR:-$HOME}/.${rcfile:t}"
-    done
-    # https://github.com/sharkdp/fd
-    brew install fd
-    # https://github.com/junegunn/fzf
-    brew install fzf
-    brew install the_silver_searcher
+	if [ -d "$HOME/.vim/bundle/Vundle.vim" ]; then
+		echo "Vundle already installed"
+	else
+		echo "Installing Vundle.."
+		git clone https://github.com/VundleVim/Vundle.vim.git ~/.vim/bundle/Vundle.vim
+	fi
+	# install tmux
+	brew install tmux
+	# install zsh
+	brew install zsh
+	chsh -s $(which zsh)
+	# install prezto
+	if [ -d "${ZDOTDIR:-$HOME}/.zprezto" ]; then
+		echo "prezto already installed"
+	else
+		echo "Installing prezto.."
+		git clone --recursive https://github.com/sorin-ionescu/prezto.git "${ZDOTDIR:-$HOME}/.zprezto"
+	fi
+	setopt EXTENDED_GLOB
+	for rcfile in "${ZDOTDIR:-$HOME}"/.zprezto/runcoms/^README.md(.N); do
+		ln -s "$rcfile" "${ZDOTDIR:-$HOME}/.${rcfile:t}"
+	done
+	# https://github.com/sharkdp/fd
+	brew install fd
+	# https://github.com/junegunn/fzf
+	brew install fzf
+	brew install the_silver_searcher
 
 elif [[ "$OSTYPE" == "freebsd"* ]]; then
 fi
@@ -45,21 +60,25 @@ rm -rf fonts
 # link bin executables
 ln bin/* /usr/local/bin
 
-# link tmux config
-ln .tmux.conf ~/.tmux.conf
+# copy .tmux.conf from my github
+curl -LSso ~/.tmux.conf https://raw.github.com/ahmedhagii/dotfiles/master/.tmux.conf
 
-# link vim config
-ln -f .vimrc ~/.vimrc
+# copy .vimrc and link to neovim
+curl -LSso ~/.tmux.conf https://raw.github.com/ahmedhagii/dotfiles/master/.tmux.conf
 mkdir -p ~/.config/nvim
 echo 'set runtimepath^=~/.vim runtimepath+=~/.vim/after
-     let &packpath = &runtimepath
-     source ~/.vimrc
+	let &packpath = &runtimepath
+	source ~/.vimrc
 ' > ~/.config/nvim/init.vim
 
-# link zshrc config
-ln -f .zshrc ~/.zshrc
+# link aliases
+curl -LSso ~/.aliases https://raw.github.com/ahmedhagii/dotfiles/master/.aliases
 
-ln -f .aliases ~/.aliases
+# link prezto config
+curl -LSso ~/.zpreztorc https://raw.github.com/ahmedhagii/dotfiles/master/.zpreztorc
 
-ln -f .gitignore ~/.gitignore
-ln -f .zshrc ~/.zshrc
+# link global gitignore
+curl -LSso ~/.gitignore https://raw.github.com/ahmedhagii/dotfiles/master/.gitignore
+
+# link zsh config
+curl -LSso ~/.zshrc https://raw.github.com/ahmedhagii/dotfiles/master/.zshrc

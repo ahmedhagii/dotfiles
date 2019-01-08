@@ -3,6 +3,11 @@ if [[ -s "${ZDOTDIR:-$HOME}/.zprezto/init.zsh" ]]; then
   source "${ZDOTDIR:-$HOME}/.zprezto/init.zsh"
 fi
 source ~/.aliases
+
+if [ -f /usr/share/scm/scm-prompt.sh ]; then
+  source /usr/share/scm/scm-prompt.sh
+fi
+
 # =============
 #    HISTORY
 # =============
@@ -95,7 +100,7 @@ export FZF_DEFAULT_COMMAND='fd --type f --hidden --follow --exclude .git'
 #    Plugins
 # =============
 # https://github.com/junegunn/fzf
-# [ -f ~/.fzf.zsh ] && source ~/.fzf.zsh
+[ -f ~/.fzf.zsh ] && source ~/.fzf.zsh
 
 autoload -Uz promptinit
 promptinit
@@ -103,26 +108,6 @@ prompt damoekri
 prompt_dir() {
       prompt_segment blue $PRIMARY_FG " `basename ${PWD/#$HOME/'~'}` "
 }
-
-# Color output (auto set to 'no' on dumb terminals).
-zstyle ':prezto:*:*' color 'yes'
-
-# Set the Prezto modules to load (browse modules).
-# The order matters.
-zstyle ':prezto:load' pmodule \
-  'environment' \
-  'terminal' \
-  'editor' \
-  'history' \
-  'directory' \
-  'spectrum' \
-  'utility' \
-  'completion' \
-  'git' \
-  'syntax-highlighting' \
-  'history-substring-search' \
-  'prompt'
-
 
 ## =============
 #    Musc
@@ -148,10 +133,3 @@ fi
 
 TMPPREFIX="${TMPDIR%/}/zsh"
 
-# tabtab source for serverless package
-# uninstall by removing these lines or running `tabtab uninstall serverless`
-[[ -f /usr/local/lib/node_modules/serverless/node_modules/tabtab/.completions/serverless.zsh ]] && . /usr/local/lib/node_modules/serverless/node_modules/tabtab/.completions/serverless.zsh
-# tabtab source for sls package
-# uninstall by removing these lines or running `tabtab uninstall sls`
-[[ -f /usr/local/lib/node_modules/serverless/node_modules/tabtab/.completions/sls.zsh ]] && . /usr/local/lib/node_modules/serverless/node_modules/tabtab/.completions/sls.zsh
-# . "/Users/Ahmed/.acme.sh/acme.sh.env"

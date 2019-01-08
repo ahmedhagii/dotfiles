@@ -17,7 +17,7 @@ case `uname` in
   ;;
 esac
 
-alias reload='source ~/.aliases source ~/.zshrc'
+alias reload='source ~/.aliases && source ~/.zshrc'
 alias g++='g++ -std=c++11'
 alias tree="find . -print | sed -e 's;[^/]*/;|____;g;s;____|; |;g'"
 alias kg="kubectl get"
