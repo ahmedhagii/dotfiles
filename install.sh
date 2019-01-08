@@ -70,7 +70,9 @@ cd ..
 rm -rf fonts
 
 # link bin executables
-ln bin/* /usr/local/bin
+if [[ -d bin/ ]]; then
+	ln bin/* /usr/local/bin
+fi
 
 # copy .tmux.conf from my github
 curl -LSso ~/.tmux.conf https://raw.github.com/ahmedhagii/dotfiles/master/.tmux.conf
