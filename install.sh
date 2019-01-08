@@ -11,11 +11,18 @@ if [[ "$OSTYPE" == "linux-gnu" ]]; then
     sudo chsh -s $(which zsh) $(whoami)
 
 elif [[ "$OSTYPE" == "darwin"* ]]; then
+	which -s brew
+	if [[ $? != 0 ]] ; then
+		# Install Homebrew
+		ruby -e "$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/master/install)"
+	else
+		brew update
+	fi
     # install neovim
     brew install neovim
 	# install vundle vim plugin manager
 	git clone https://github.com/VundleVim/Vundle.vim.git ~/.vim/bundle/Vundle.vim
-    # install tmux
+	# install tmux
     brew install tmux
     # install zsh
     brew install zsh
