@@ -96,3 +96,6 @@ curl -LSso ~/.gitignore https://raw.github.com/ahmedhagii/dotfiles/master/.gitig
 
 # link zsh config
 curl -LSso ~/.zshrc https://raw.github.com/ahmedhagii/dotfiles/master/.zshrc
+
+# defined in .aliases, re-sources config files
+reload
