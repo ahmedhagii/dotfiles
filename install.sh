@@ -1,4 +1,4 @@
-#!/bin/bash
+#!/bin/zsh
 
 if [[ "$OSTYPE" == "linux-gnu" ]]; then
     # install neovim
@@ -13,6 +13,8 @@ if [[ "$OSTYPE" == "linux-gnu" ]]; then
 elif [[ "$OSTYPE" == "darwin"* ]]; then
     # install neovim
     brew install neovim
+	# install vundle vim plugin manager
+	git clone https://github.com/VundleVim/Vundle.vim.git ~/.vim/bundle/Vundle.vim
     # install tmux
     brew install tmux
     # install zsh
@@ -47,7 +49,7 @@ ln bin/* /usr/local/bin
 ln .tmux.conf ~/.tmux.conf
 
 # link vim config
-ln .vimrc ~/.vimrc
+ln -f .vimrc ~/.vimrc
 mkdir -p ~/.config/nvim
 echo 'set runtimepath^=~/.vim runtimepath+=~/.vim/after
      let &packpath = &runtimepath
@@ -55,4 +57,9 @@ echo 'set runtimepath^=~/.vim runtimepath+=~/.vim/after
 ' > ~/.config/nvim/init.vim
 
 # link zshrc config
-ln .zshrc ~/.zshrc
+ln -f .zshrc ~/.zshrc
+
+ln -f .aliases ~/.aliases
+
+ln -f .gitignore ~/.gitignore
+ln -f .zshrc ~/.zshrc

@@ -87,8 +87,8 @@ export FZF_DEFAULT_COMMAND='fd --type f --hidden --follow --exclude .git'
 #
 
 # Customize to your needs...
-source <(kubectl completion zsh)
-source <(kops completion zsh)
+# source <(kubectl completion zsh)
+# source <(kops completion zsh)
 
 
 ## =============
@@ -154,4 +154,4 @@ TMPPREFIX="${TMPDIR%/}/zsh"
 # tabtab source for sls package
 # uninstall by removing these lines or running `tabtab uninstall sls`
 [[ -f /usr/local/lib/node_modules/serverless/node_modules/tabtab/.completions/sls.zsh ]] && . /usr/local/lib/node_modules/serverless/node_modules/tabtab/.completions/sls.zsh
-. "/Users/Ahmed/.acme.sh/acme.sh.env"
+# . "/Users/Ahmed/.acme.sh/acme.sh.env"
