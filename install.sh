@@ -1,12 +1,14 @@
 #!/bin/zsh
 
+# CentOS
 if [ -f /etc/redhat-release ]; then
-	# CentOS
 	sudo yum install -y the_silver_searcher zsh neovim fd tmux
 	git clone --depth 1 https://github.com/junegunn/fzf.git ~/.fzf
 	~/.fzf/install --completion --update-rc --no-key-bindings
+
+# Ubuntu
 elif [ -f /etc/lsb-release ]; then
-	# Ubuntu
+
 	# install neovim
 	sudo add-apt-repository ppa:neovim-ppa/unstable
 	sudo apt-get update
@@ -15,7 +17,17 @@ elif [ -f /etc/lsb-release ]; then
 	# install zsh
 	sudo apt-get install -y zsh
 	sudo chsh -s $(which zsh) $(whoami)
+
+# MacOS
 elif [[ "$OSTYPE" == "darwin"* ]]; then
+
+	which -s brew
+	if [[ $? != 0 ]] ; then
+		# Install Homebrew
+		ruby -e "$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/master/install)"
+	else
+		brew update
+	fi
 	# install neovim
 	brew install neovim
 	# install vundle vim plugin manager
